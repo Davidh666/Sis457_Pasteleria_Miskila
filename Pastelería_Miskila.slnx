@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="CadPastelería_Miskila/CadPastelería_Miskila.csproj" />
+  <Project Path="ClnPastelería_Miskila/ClnPastelería_Miskila.csproj" />
+  <Project Path="CpPastelería_Miskila/CpPastelería_Miskila.csproj" />
+</Solution>
