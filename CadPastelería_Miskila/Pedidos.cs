@@ -28,7 +28,7 @@ namespace CadPastelería_Miskila
         public Nullable<System.DateTime> fecha_entrega { get; set; }
         public string tipo_pedido { get; set; }
         public decimal total { get; set; }
-        public string estado { get; set; }
+        public int estado { get; set; }
         public string observaciones { get; set; }
         public short estado_reg { get; set; }
     

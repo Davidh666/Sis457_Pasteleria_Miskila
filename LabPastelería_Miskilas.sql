@@ -68,7 +68,7 @@ CREATE TABLE Pedidos (
     fecha_entrega DATETIME NULL,
     tipo_pedido VARCHAR(50) NOT NULL, -- En línea / Presencial
     total DECIMAL(18,2) NOT NULL,
-    estado VARCHAR(50) NOT NULL,
+    estado INT NOT NULL,
     observaciones VARCHAR(MAX),
     CONSTRAINT fk_Pedidos_Clientes FOREIGN KEY (id_cliente) REFERENCES Clientes(id_cliente) ON DELETE SET NULL
 );
