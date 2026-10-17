@@ -1,5 +1,5 @@
 <Solution>
-  <Project Path="CadPastelería_Miskila/CadPastelería_Miskila.csproj" />
-  <Project Path="ClnPastelería_Miskila/ClnPastelería_Miskila.csproj" />
-  <Project Path="CpPastelería_Miskila/CpPastelería_Miskila.csproj" />
+  <Project Path="CadPastelería_Miskila/CadPastelería_Miskila.csproj" Id="b0c5556e-25ea-49c8-9905-8859a23da46d" />
+  <Project Path="ClnPastelería_Miskila/ClnPastelería_Miskila.csproj" Id="741b3844-ebab-47e6-904f-336fbc311bff" />
+  <Project Path="CpPastelería_Miskila/CpPastelería_Miskila.csproj" Id="ca027f0b-5f8b-467e-b16f-553c686a13a9" />
 </Solution>
