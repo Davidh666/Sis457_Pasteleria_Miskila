@@ -54,7 +54,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdministradoresCln.cs" />
+    <Compile Include="ClientesCln.cs" />
+    <Compile Include="DetallePedidoCln.cs" />
+    <Compile Include="EntregasCln.cs" />
+    <Compile Include="InventarioCln.cs" />
+    <Compile Include="PagosCln.cs" />
+    <Compile Include="PedidosCln.cs" />
+    <Compile Include="PersonalizacionCln.cs" />
+    <Compile Include="ProductosCln.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
