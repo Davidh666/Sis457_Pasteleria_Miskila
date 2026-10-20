@@ -18,4 +18,9 @@ namespace ClnPastelería_Miskila
         Disponible = 1,
         NoDisponible = 0
     }
+    public enum RolUsuario
+    {
+        Administrador = 1,
+        Cliente = 2
+    }
 }
