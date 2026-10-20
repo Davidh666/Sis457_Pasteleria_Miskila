@@ -56,7 +56,7 @@ Cabecera de las órdenes de venta y pedidos registrados.
 * `fecha_entrega` (DATETIME)
 * `tipo_pedido` (VARCHAR) - *En línea / Presencial*
 * `total` (DECIMAL)
-* `estado` (VARCHAR)
+* `estado` (INT)
 * `observaciones` (TEXT)
 
 ### 6. `DetallePedido`
@@ -95,3 +95,6 @@ Gestión de logística y direcciones de envío para pedidos a domicilio.
 * `referencia` (VARCHAR)
 * `costo_entrega` (DECIMAL)
 * `estado_entrega` (VARCHAR)
+
+### UI en FIGMA
+enlace: https://www.figma.com/design/tiyOU4AqXHd7IHTjz6e0fH/Miskila?node-id=0-1&t=BkCSD8xbF0FxbL12-1

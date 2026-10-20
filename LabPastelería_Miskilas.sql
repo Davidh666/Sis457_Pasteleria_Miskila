@@ -1,19 +1,22 @@
-﻿create database LabPastelería_Miskila
-go
-USE master
-go
-create login usrpasteleria with password = N'1234567',
-    default_database = LabPastelería_Miskila,
-    check_expiration = off,
-    check_policy = on
-go
-use LabPastelería_Miskila
-go
-create user usrpasteleria for login usrpasteleria
-go
-alter role [db_owner] add member usrpasteleria
-go
+﻿CREATE DATABASE LabPastelería_Miskila;
+GO
 
+USE LabPastelería_Miskila;
+GO
+
+CREATE LOGIN usrpasteleria WITH PASSWORD = N'1234567',
+    DEFAULT_DATABASE = LabPastelería_Miskila,
+    CHECK_EXPIRATION = OFF,
+    CHECK_POLICY = OFF;
+GO
+
+CREATE USER usrpasteleria FOR LOGIN usrpasteleria;
+GO
+
+ALTER ROLE [db_owner] ADD MEMBER usrpasteleria;
+GO
+
+-- Limpieza previa de tablas
 DROP TABLE IF EXISTS Entregas;
 DROP TABLE IF EXISTS Pagos;
 DROP TABLE IF EXISTS Personalizacion;
@@ -24,54 +27,51 @@ DROP TABLE IF EXISTS Productos;
 DROP TABLE IF EXISTS Usuarios;
 GO
 
--- 1. Usuarios (Unifica Clientes y Administradores para el Login y Roles)
+-- ==========================================
+-- CREACIÓN DE TABLAS BASE
+-- ==========================================
+
+-- 1. Usuarios
 CREATE TABLE Usuarios (
     id_usuario INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     nombre VARCHAR(100) NOT NULL,
-    identificador VARCHAR(100) NOT NULL UNIQUE, -- Celular (clientes) o usuario (admin)
-    contrasena_hash VARCHAR(255) NOT NULL,
-    rol VARCHAR(30) NOT NULL,                   -- 'Administrador' o 'Cliente'
-    estado SMALLINT NOT NULL DEFAULT 1          -- -1: Eliminado, 0: Inactivo, 1: Activo
+    celular VARCHAR(20) NOT NULL UNIQUE,
+    email VARCHAR(50) NOT NULL UNIQUE,
+    rol VARCHAR(50) NOT NULL,
+    contrasena_hash VARCHAR(255) NOT NULL
 );
-GO
 
--- 2. Productos (CRUD 1: Gestionado por Administrador)
+-- 2. Productos
 CREATE TABLE Productos (
     id_producto INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     nombre VARCHAR(100) NOT NULL,
     descripcion VARCHAR(MAX),
     precio DECIMAL(18,2) NOT NULL,
     imagen VARCHAR(255),
-    disponible BIT NOT NULL,
-    estado SMALLINT NOT NULL DEFAULT 1
+    disponible BIT NOT NULL
 );
-GO
 
--- 3. Inventario (Control de stock)
+-- 3. Inventario
 CREATE TABLE Inventario (
     id_producto INT NOT NULL PRIMARY KEY,
     cantidad_disponible INT NOT NULL,
     stock_minimo INT NOT NULL,
     fecha_actualizacion DATETIME NOT NULL,
-    estado SMALLINT NOT NULL DEFAULT 1,
     CONSTRAINT fk_Inventario_Productos FOREIGN KEY (id_producto) REFERENCES Productos(id_producto) ON DELETE CASCADE
 );
-GO
 
--- 4. Pedidos (CRUD 2: Creado por Clientes, gestionado por Admins)
+-- 4. Pedidos
 CREATE TABLE Pedidos (
     id_pedido INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     id_usuario INT NULL,
     fecha_pedido DATETIME NOT NULL,
     fecha_entrega DATETIME NULL,
-    tipo_pedido VARCHAR(50) NOT NULL, -- 'En línea' / 'Presencial'
+    tipo_pedido VARCHAR(50) NOT NULL, -- En línea / Presencial
     total DECIMAL(18,2) NOT NULL,
-    estado VARCHAR(50) NOT NULL,      -- 'Pendiente', 'En Proceso', 'Completado'
+    estado VARCHAR(50) NOT NULL,
     observaciones VARCHAR(MAX),
-    estado_reg SMALLINT NOT NULL DEFAULT 1,
     CONSTRAINT fk_Pedidos_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario) ON DELETE SET NULL
 );
-GO
 
 -- 5. DetallePedido
 CREATE TABLE DetallePedido (
@@ -81,13 +81,11 @@ CREATE TABLE DetallePedido (
     cantidad INT NOT NULL,
     precio_unitario DECIMAL(18,2) NOT NULL,
     subtotal DECIMAL(18,2) NOT NULL,
-    estado SMALLINT NOT NULL DEFAULT 1,
     CONSTRAINT fk_DetallePedido_Pedidos FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido) ON DELETE CASCADE,
     CONSTRAINT fk_DetallePedido_Productos FOREIGN KEY (id_producto) REFERENCES Productos(id_producto)
 );
-GO
 
--- 6. Personalizacion (Detalles a medida de los pasteles)
+-- 6. Personalizacion
 CREATE TABLE Personalizacion (
     id_personalizacion INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     id_detalle INT NOT NULL UNIQUE,
@@ -96,25 +94,21 @@ CREATE TABLE Personalizacion (
     decoracion VARCHAR(255),
     instrucciones VARCHAR(MAX),
     costo_adicional DECIMAL(18,2) NOT NULL,
-    estado SMALLINT NOT NULL DEFAULT 1,
     CONSTRAINT fk_Personalizacion_DetallePedido FOREIGN KEY (id_detalle) REFERENCES DetallePedido(id_detalle) ON DELETE CASCADE
 );
-GO
 
 -- 7. Pagos
 CREATE TABLE Pagos (
     id_pago INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     id_pedido INT NOT NULL,
-    metodo_pago VARCHAR(50) NOT NULL, -- 'QR' / 'Efectivo'
+    metodo_pago VARCHAR(50) NOT NULL, -- QR / Efectivo
     monto DECIMAL(18,2) NOT NULL,
     fecha_pago DATETIME NOT NULL,
     estado_pago VARCHAR(50) NOT NULL,
-    estado SMALLINT NOT NULL DEFAULT 1,
     CONSTRAINT fk_Pagos_Pedidos FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido) ON DELETE CASCADE
 );
-GO
 
--- 8. Entregas (Para envíos a domicilio)
+-- 8. Entregas
 CREATE TABLE Entregas (
     id_entrega INT NOT NULL PRIMARY KEY IDENTITY(1,1),
     id_pedido INT NOT NULL UNIQUE,
@@ -122,23 +116,89 @@ CREATE TABLE Entregas (
     referencia VARCHAR(255),
     costo_entrega DECIMAL(18,2) NOT NULL,
     estado_entrega VARCHAR(50) NOT NULL,
-    estado SMALLINT NOT NULL DEFAULT 1,
     CONSTRAINT fk_Entregas_Pedidos FOREIGN KEY (id_pedido) REFERENCES Pedidos(id_pedido) ON DELETE CASCADE
 );
 GO
 
--- DATOS DE PRUEBA INICIALES
-INSERT INTO Usuarios (nombre, identificador, contrasena_hash, rol) VALUES 
-('Carla Admin', 'admin_carla', 'hash_admin_1', 'Administrador'),
-('Ana Pérez', '70123456', 'hash_pwd_cliente1', 'Cliente');
+-- ==========================================
+-- ALTER TABLES PARA LOS ESTADOS
+-- ==========================================
+ALTER TABLE Usuarios ADD estado SMALLINT NOT NULL DEFAULT 1; -- -1: Eliminado, 0: Inactivo, 1: Activo
+ALTER TABLE Productos ADD estado SMALLINT NOT NULL DEFAULT 1;
+ALTER TABLE Inventario ADD estado SMALLINT NOT NULL DEFAULT 1;
+ALTER TABLE Pedidos ADD estado_reg SMALLINT NOT NULL DEFAULT 1; -- Para no chocar con el VARCHAR 'estado'
+ALTER TABLE DetallePedido ADD estado SMALLINT NOT NULL DEFAULT 1;
+ALTER TABLE Personalizacion ADD estado SMALLINT NOT NULL DEFAULT 1;
+ALTER TABLE Pagos ADD estado SMALLINT NOT NULL DEFAULT 1;
+ALTER TABLE Entregas ADD estado SMALLINT NOT NULL DEFAULT 1;
 GO
 
-INSERT INTO Productos (nombre, descripcion, precio, imagen, disponible) VALUES 
+-- ==========================================
+-- INSERCIÓN DE DATOS DE PRUEBA
+-- ==========================================
+
+-- 1. Usuarios
+INSERT INTO Usuarios (nombre, celular, email, rol, contrasena_hash) 
+VALUES 
+('Ana Pérez', '70123456', 'AnaPerez@gmail.com', 'cliente', 'hash_pwd_cliente1'),
+('Luis Gómez', '71234567', 'LuisGomezAdm@gmail.com', 'Administrador', 'hash_pwd_cliente2');
+GO
+
+-- 2. Productos
+INSERT INTO Productos (nombre, descripcion, precio, imagen, disponible) 
+VALUES 
 ('Torta de Chocolate', 'Bizcocho húmedo de chocolate con relleno de manjar', 90.00, 'torta_choco.jpg', 1),
 ('Queque Seco', 'Queque tradicional de vainilla', 35.00, 'queque_seco.jpg', 1);
 GO
 
-INSERT INTO Inventario (id_producto, cantidad_disponible, stock_minimo, fecha_actualizacion) VALUES 
+-- 3. Inventario
+INSERT INTO Inventario (id_producto, cantidad_disponible, stock_minimo, fecha_actualizacion) 
+VALUES 
 (1, 10, 2, GETDATE()),
 (2, 15, 3, GETDATE());
 GO
+
+-- 4. Pedidos
+INSERT INTO Pedidos (id_usuario, fecha_pedido, fecha_entrega, tipo_pedido, total, estado, observaciones) 
+VALUES 
+(1, GETDATE(), DATEADD(day, 1, GETDATE()), 'En línea', 90.00, 'Pendiente', 'Entregar por la tarde por favor'),
+(2, GETDATE(), NULL, 'Presencial', 35.00, 'Completado', 'Ninguna');
+GO
+
+-- 5. DetallePedido
+INSERT INTO DetallePedido (id_pedido, id_producto, cantidad, precio_unitario, subtotal) 
+VALUES 
+(1, 1, 1, 90.00, 90.00),
+(2, 2, 1, 35.00, 35.00);
+GO
+
+-- 6. Personalizacion
+INSERT INTO Personalizacion (id_detalle, tamaño, sabor, decoracion, instrucciones, costo_adicional) 
+VALUES 
+(1, 'Mediano', 'Chocolate extra', 'Frutas y chocolate', 'Escribir "Feliz Cumpleaños Ana" con letras blancas', 10.00);
+GO
+
+-- 7. Pagos
+INSERT INTO Pagos (id_pedido, metodo_pago, monto, fecha_pago, estado_pago) 
+VALUES 
+(1, 'QR', 90.00, GETDATE(), 'Completado'),
+(2, 'Efectivo', 35.00, GETDATE(), 'Completado');
+GO
+
+-- 8. Entregas
+INSERT INTO Entregas (id_pedido, direccion, referencia, costo_entrega, estado_entrega) 
+VALUES 
+(1, 'Av. 6 de Agosto #123', 'Cerca de la plaza principal, portón negro', 15.00, 'Pendiente');
+GO
+
+-- ==========================================
+-- CONSULTAS DE VERIFICACIÓN
+-- ==========================================
+SELECT * FROM Usuarios;
+SELECT * FROM Productos;
+SELECT * FROM Inventario;
+SELECT * FROM Pedidos;
+SELECT * FROM DetallePedido;
+SELECT * FROM Personalizacion;
+SELECT * FROM Pagos;
+SELECT * FROM Entregas;

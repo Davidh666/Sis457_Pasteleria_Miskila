@@ -13,10 +13,10 @@ namespace CadPastelería_Miskila
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class LabPastelería_MiskilaEntities1 : DbContext
+    public partial class LabPastelería_MiskilaEntities : DbContext
     {
-        public LabPastelería_MiskilaEntities1()
-            : base("name=LabPastelería_MiskilaEntities1")
+        public LabPastelería_MiskilaEntities()
+            : base("name=LabPastelería_MiskilaEntities")
         {
         }
     

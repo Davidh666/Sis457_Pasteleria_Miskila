@@ -14,6 +14,7 @@ namespace CadPastelería_Miskila
     
     public partial class Usuarios
     {
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
         {
@@ -22,9 +23,10 @@ namespace CadPastelería_Miskila
     
         public int id_usuario { get; set; }
         public string nombre { get; set; }
-        public string identificador { get; set; }
-        public string contrasena_hash { get; set; }
+        public string celular { get; set; }
+        public string email { get; set; }
         public string rol { get; set; }
+        public string contrasena_hash { get; set; }
         public short estado { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -96,9 +96,10 @@
           </Key>
           <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="identificador" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="contrasena_hash" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="rol" Type="varchar" MaxLength="30" Nullable="false" />
           <Property Name="estado" Type="smallint" Nullable="false" />
         </EntityType>
         <Association Name="fk_DetallePedido_Pedidos">
@@ -342,9 +343,10 @@
           </Key>
           <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="identificador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="contrasena_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rol" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="estado" Type="Int16" Nullable="false" />
           <NavigationProperty Name="Pedidos" Relationship="Self.fk_Pedidos_Usuarios" FromRole="Usuarios" ToRole="Pedidos" />
         </EntityType>
@@ -442,7 +444,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="LabPastelería_MiskilaEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="LabPastelería_MiskilaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
           <EntitySet Name="Entregas" EntityType="Self.Entregas" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" />
@@ -485,7 +487,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LabPastelería_MiskilaModelStoreContainer" CdmEntityContainer="LabPastelería_MiskilaEntities1">
+        <EntityContainerMapping StorageEntityContainer="LabPastelería_MiskilaModelStoreContainer" CdmEntityContainer="LabPastelería_MiskilaEntities">
           <EntitySetMapping Name="DetallePedido">
             <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.DetallePedido">
               <MappingFragment StoreEntitySet="DetallePedido">
@@ -583,9 +585,10 @@
               <MappingFragment StoreEntitySet="Usuarios">
                 <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="identificador" ColumnName="identificador" />
-                <ScalarProperty Name="contrasena_hash" ColumnName="contrasena_hash" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="contrasena_hash" ColumnName="contrasena_hash" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
