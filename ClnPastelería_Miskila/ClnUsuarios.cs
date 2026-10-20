@@ -13,10 +13,10 @@ namespace ClnPastelería_Miskila
         {
             using (var context = new LabPastelería_MiskilaEntities())
             {
-                var existe = context.Usuarios.Where(u => u.usuario == usuario.usuario).FirstOrDefault();
+                var existe = context.Usuarios.Where(u => u.email == usuario.email).FirstOrDefault();
                 if (existe != null)
                 {
-                    throw new Exception("El usuario con el nombre " + usuario.usuario + " ya existe.");
+                    throw new Exception("El usuario con el email " + usuario.email + " ya existe.");
                 }
                 context.Usuarios.Add(usuario);
                 context.SaveChanges();
@@ -33,7 +33,6 @@ namespace ClnPastelería_Miskila
                 {
                     throw new Exception("El usuario con el ID " + usuario.id_usuario + " no existe.");
                 }
-                existe.usuario = usuario.usuario;
                 existe.contrasena_hash = usuario.contrasena_hash;
                 existe.nombre = usuario.nombre;
                 existe.rol = usuario.rol;
