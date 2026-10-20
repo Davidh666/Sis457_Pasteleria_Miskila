@@ -54,10 +54,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdministradoresCln.cs" />
     <Compile Include="EntregasCln.cs" />
     <Compile Include="PagosCln.cs" />
     <Compile Include="PersonalizacionCln.cs" />
+    <Compile Include="ProductoCln.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
