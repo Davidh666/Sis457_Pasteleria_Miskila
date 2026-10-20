@@ -23,21 +23,21 @@ namespace CadPastelería_Miskila
         }
     
         public int id_pedido { get; set; }
-        public Nullable<int> id_cliente { get; set; }
+        public Nullable<int> id_usuario { get; set; }
         public System.DateTime fecha_pedido { get; set; }
         public Nullable<System.DateTime> fecha_entrega { get; set; }
         public string tipo_pedido { get; set; }
         public decimal total { get; set; }
-        public int estado { get; set; }
+        public string estado { get; set; }
         public string observaciones { get; set; }
         public short estado_reg { get; set; }
     
-        public virtual Clientes Clientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallePedido> DetallePedido { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Entregas> Entregas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pagos> Pagos { get; set; }
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

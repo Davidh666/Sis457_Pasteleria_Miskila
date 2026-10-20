@@ -13,10 +13,10 @@ namespace CadPastelería_Miskila
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Pastelería_MiskilaEntities : DbContext
+    public partial class LabPastelería_MiskilaEntities : DbContext
     {
-        public Pastelería_MiskilaEntities()
-            : base("name=Pastelería_MiskilaEntities")
+        public LabPastelería_MiskilaEntities()
+            : base("name=LabPastelería_MiskilaEntities")
         {
         }
     
@@ -25,8 +25,6 @@ namespace CadPastelería_Miskila
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Administradores> Administradores { get; set; }
-        public virtual DbSet<Clientes> Clientes { get; set; }
         public virtual DbSet<DetallePedido> DetallePedido { get; set; }
         public virtual DbSet<Entregas> Entregas { get; set; }
         public virtual DbSet<Inventario> Inventario { get; set; }
@@ -34,5 +32,6 @@ namespace CadPastelería_Miskila
         public virtual DbSet<Pedidos> Pedidos { get; set; }
         public virtual DbSet<Personalizacion> Personalizacion { get; set; }
         public virtual DbSet<Productos> Productos { get; set; }
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
     }
 }

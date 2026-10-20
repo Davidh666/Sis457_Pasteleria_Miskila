@@ -4,23 +4,22 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="14ef4acfb54d411da2097bfa351ae86b" Name="Diagram1" ZoomLevel="55">
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.Administradores" Width="1.5" PointX="12.125" PointY="8.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.Clientes" Width="1.5" PointX="4" PointY="7" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.DetallePedido" Width="1.5" PointX="9.625" PointY="4.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.Entregas" Width="1.5" PointX="9.625" PointY="8.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.Inventario" Width="1.5" PointX="9.625" PointY="0.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.Pagos" Width="1.5" PointX="9.625" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.Pedidos" Width="1.5" PointX="7.375" PointY="5.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.Personalizacion" Width="1.5" PointX="11.875" PointY="4.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="Pastelería_MiskilaModel.Productos" Width="1.5" PointX="7.375" PointY="2.25" IsExpanded="true" />
-        <AssociationConnector Association="Pastelería_MiskilaModel.fk_Pedidos_Clientes" ManuallyRouted="false" />
-        <AssociationConnector Association="Pastelería_MiskilaModel.fk_DetallePedido_Pedidos" ManuallyRouted="false" />
-        <AssociationConnector Association="Pastelería_MiskilaModel.fk_DetallePedido_Productos" ManuallyRouted="false" />
-        <AssociationConnector Association="Pastelería_MiskilaModel.fk_Personalizacion_DetallePedido" ManuallyRouted="false" />
-        <AssociationConnector Association="Pastelería_MiskilaModel.fk_Entregas_Pedidos" ManuallyRouted="false" />
-        <AssociationConnector Association="Pastelería_MiskilaModel.fk_Inventario_Productos" ManuallyRouted="false" />
-        <AssociationConnector Association="Pastelería_MiskilaModel.fk_Pagos_Pedidos" ManuallyRouted="false" />
+      <Diagram DiagramId="655e1c400a294e64b4b773c4c81cd609" Name="Diagram1">
+        <EntityTypeShape EntityType="LabPastelería_MiskilaModel.DetallePedido" Width="1.5" PointX="5.25" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabPastelería_MiskilaModel.Entregas" Width="1.5" PointX="5.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabPastelería_MiskilaModel.Inventario" Width="1.5" PointX="5.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabPastelería_MiskilaModel.Pagos" Width="1.5" PointX="5.25" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabPastelería_MiskilaModel.Pedidos" Width="1.5" PointX="3" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabPastelería_MiskilaModel.Personalizacion" Width="1.5" PointX="7.5" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabPastelería_MiskilaModel.Productos" Width="1.5" PointX="3" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LabPastelería_MiskilaModel.Usuarios" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="LabPastelería_MiskilaModel.fk_DetallePedido_Pedidos" ManuallyRouted="false" />
+        <AssociationConnector Association="LabPastelería_MiskilaModel.fk_DetallePedido_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="LabPastelería_MiskilaModel.fk_Personalizacion_DetallePedido" ManuallyRouted="false" />
+        <AssociationConnector Association="LabPastelería_MiskilaModel.fk_Entregas_Pedidos" ManuallyRouted="false" />
+        <AssociationConnector Association="LabPastelería_MiskilaModel.fk_Inventario_Productos" ManuallyRouted="false" />
+        <AssociationConnector Association="LabPastelería_MiskilaModel.fk_Pagos_Pedidos" ManuallyRouted="false" />
+        <AssociationConnector Association="LabPastelería_MiskilaModel.fk_Pedidos_Usuarios" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

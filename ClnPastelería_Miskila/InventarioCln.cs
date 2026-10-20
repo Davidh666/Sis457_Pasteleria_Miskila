@@ -11,7 +11,7 @@ namespace ClnPastelería_Miskila
     {
         public static int crearInventario(Inventario inventario)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var existe = context.Inventario.Where(i => i.id_producto == inventario.id_producto).FirstOrDefault();
                 if (existe != null)
@@ -23,11 +23,13 @@ namespace ClnPastelería_Miskila
                 return inventario.id_producto;
             }
         }
+
         public static int actualizarInventario(Inventario inventario)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
-                var existe = context.Inventario.Where(i => i.id_producto == inventario.id_producto).FirstOrDefault();
+                var existe = context.Inventario.Where(i => i.id_producto == inventario.id_producto)
+                    .FirstOrDefault();
                 if (existe == null)
                 {
                     throw new Exception("El inventario con el código " + inventario.id_producto + " no existe.");
@@ -37,9 +39,10 @@ namespace ClnPastelería_Miskila
                 return context.SaveChanges();
             }
         }
+
         public static int eliminarInventario(int id_producto)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var existe = context.Inventario.Find(id_producto);
                 if (existe == null)
@@ -50,9 +53,10 @@ namespace ClnPastelería_Miskila
                 return context.SaveChanges();
             }
         }
+
         public static Inventario obtenerInventario(int id_producto)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var inventario = context.Inventario.Find(id_producto);
                 if (inventario == null)
@@ -62,9 +66,10 @@ namespace ClnPastelería_Miskila
                 return inventario;
             }
         }
+
         public static List<Inventario> obtenerTodosInventarios()
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 return context.Inventario.ToList();
             }

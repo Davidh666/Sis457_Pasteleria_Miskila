@@ -4,28 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="Pastelería_MiskilaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Administradores">
-          <Key>
-            <PropertyRef Name="id_administrador" />
-          </Key>
-          <Property Name="id_administrador" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="nombre_usuario" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="contrasena_hash" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="rol" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="estado" Type="smallint" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Clientes">
-          <Key>
-            <PropertyRef Name="id_cliente" />
-          </Key>
-          <Property Name="id_cliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="contrasena_hash" Type="varchar" MaxLength="255" Nullable="false" />
-          <Property Name="estado" Type="smallint" Nullable="false" />
-        </EntityType>
+      <Schema Namespace="LabPastelería_MiskilaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="DetallePedido">
           <Key>
             <PropertyRef Name="id_detalle" />
@@ -77,7 +56,7 @@
             <PropertyRef Name="id_pedido" />
           </Key>
           <Property Name="id_pedido" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_cliente" Type="int" />
+          <Property Name="id_usuario" Type="int" />
           <Property Name="fecha_pedido" Type="datetime" Nullable="false" />
           <Property Name="fecha_entrega" Type="datetime" />
           <Property Name="tipo_pedido" Type="varchar" MaxLength="50" Nullable="false" />
@@ -109,6 +88,18 @@
           <Property Name="precio" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="imagen" Type="varchar" MaxLength="255" />
           <Property Name="disponible" Type="bit" Nullable="false" />
+          <Property Name="estado" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="nombre" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="celular" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contrasena_hash" Type="varchar" MaxLength="255" Nullable="false" />
           <Property Name="estado" Type="smallint" Nullable="false" />
         </EntityType>
         <Association Name="fk_DetallePedido_Pedidos">
@@ -179,15 +170,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="fk_Pedidos_Clientes">
-          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+        <Association Name="fk_Pedidos_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="id_cliente" />
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id_usuario" />
             </Principal>
             <Dependent Role="Pedidos">
-              <PropertyRef Name="id_cliente" />
+              <PropertyRef Name="id_usuario" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -205,9 +196,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Pastelería_MiskilaModelStoreContainer">
-          <EntitySet Name="Administradores" EntityType="Self.Administradores" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="LabPastelería_MiskilaModelStoreContainer">
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Entregas" EntityType="Self.Entregas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" Schema="dbo" store:Type="Tables" />
@@ -215,6 +204,7 @@
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Personalizacion" EntityType="Self.Personalizacion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_DetallePedido_Pedidos" Association="Self.fk_DetallePedido_Pedidos">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
@@ -235,8 +225,8 @@
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="Pagos" EntitySet="Pagos" />
           </AssociationSet>
-          <AssociationSet Name="fk_Pedidos_Clientes" Association="Self.fk_Pedidos_Clientes">
-            <End Role="Clientes" EntitySet="Clientes" />
+          <AssociationSet Name="fk_Pedidos_Usuarios" Association="Self.fk_Pedidos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Pedidos" EntitySet="Pedidos" />
           </AssociationSet>
           <AssociationSet Name="fk_Personalizacion_DetallePedido" Association="Self.fk_Personalizacion_DetallePedido">
@@ -248,29 +238,7 @@
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="Pastelería_MiskilaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="Administradores">
-          <Key>
-            <PropertyRef Name="id_administrador" />
-          </Key>
-          <Property Name="id_administrador" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="nombre_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contrasena_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="Int16" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Clientes">
-          <Key>
-            <PropertyRef Name="id_cliente" />
-          </Key>
-          <Property Name="id_cliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="contrasena_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="estado" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Pedidos" Relationship="Self.fk_Pedidos_Clientes" FromRole="Clientes" ToRole="Pedidos" />
-        </EntityType>
+      <Schema Namespace="LabPastelería_MiskilaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="DetallePedido">
           <Key>
             <PropertyRef Name="id_detalle" />
@@ -328,7 +296,7 @@
             <PropertyRef Name="id_pedido" />
           </Key>
           <Property Name="id_pedido" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_cliente" Type="Int32" />
+          <Property Name="id_usuario" Type="Int32" />
           <Property Name="fecha_pedido" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="fecha_entrega" Type="DateTime" Precision="3" />
           <Property Name="tipo_pedido" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
@@ -336,10 +304,10 @@
           <Property Name="estado" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="observaciones" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="estado_reg" Type="Int16" Nullable="false" />
-          <NavigationProperty Name="Clientes" Relationship="Self.fk_Pedidos_Clientes" FromRole="Pedidos" ToRole="Clientes" />
           <NavigationProperty Name="DetallePedido" Relationship="Self.fk_DetallePedido_Pedidos" FromRole="Pedidos" ToRole="DetallePedido" />
           <NavigationProperty Name="Entregas" Relationship="Self.fk_Entregas_Pedidos" FromRole="Pedidos" ToRole="Entregas" />
           <NavigationProperty Name="Pagos" Relationship="Self.fk_Pagos_Pedidos" FromRole="Pedidos" ToRole="Pagos" />
+          <NavigationProperty Name="Usuarios" Relationship="Self.fk_Pedidos_Usuarios" FromRole="Pedidos" ToRole="Usuarios" />
         </EntityType>
         <EntityType Name="Personalizacion">
           <Key>
@@ -369,18 +337,19 @@
           <NavigationProperty Name="DetallePedido" Relationship="Self.fk_DetallePedido_Productos" FromRole="Productos" ToRole="DetallePedido" />
           <NavigationProperty Name="Inventario" Relationship="Self.fk_Inventario_Productos" FromRole="Productos" ToRole="Inventario" />
         </EntityType>
-        <Association Name="fk_Pedidos_Clientes">
-          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
-          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Clientes">
-              <PropertyRef Name="id_cliente" />
-            </Principal>
-            <Dependent Role="Pedidos">
-              <PropertyRef Name="id_cliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
+        <EntityType Name="Usuarios">
+          <Key>
+            <PropertyRef Name="id_usuario" />
+          </Key>
+          <Property Name="id_usuario" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rol" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contrasena_hash" Type="String" MaxLength="255" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="estado" Type="Int16" Nullable="false" />
+          <NavigationProperty Name="Pedidos" Relationship="Self.fk_Pedidos_Usuarios" FromRole="Usuarios" ToRole="Pedidos" />
+        </EntityType>
         <Association Name="fk_DetallePedido_Pedidos">
           <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -463,9 +432,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Pastelería_MiskilaEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Administradores" EntityType="Self.Administradores" />
-          <EntitySet Name="Clientes" EntityType="Self.Clientes" />
+        <Association Name="fk_Pedidos_Usuarios">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="0..1" />
+          <End Role="Pedidos" Type="Self.Pedidos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="id_usuario" />
+            </Principal>
+            <Dependent Role="Pedidos">
+              <PropertyRef Name="id_usuario" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LabPastelería_MiskilaEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="DetallePedido" EntityType="Self.DetallePedido" />
           <EntitySet Name="Entregas" EntityType="Self.Entregas" />
           <EntitySet Name="Inventario" EntityType="Self.Inventario" />
@@ -473,10 +452,7 @@
           <EntitySet Name="Pedidos" EntityType="Self.Pedidos" />
           <EntitySet Name="Personalizacion" EntityType="Self.Personalizacion" />
           <EntitySet Name="Productos" EntityType="Self.Productos" />
-          <AssociationSet Name="fk_Pedidos_Clientes" Association="Self.fk_Pedidos_Clientes">
-            <End Role="Clientes" EntitySet="Clientes" />
-            <End Role="Pedidos" EntitySet="Pedidos" />
-          </AssociationSet>
+          <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
           <AssociationSet Name="fk_DetallePedido_Pedidos" Association="Self.fk_DetallePedido_Pedidos">
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="DetallePedido" EntitySet="DetallePedido" />
@@ -501,38 +477,19 @@
             <End Role="Pedidos" EntitySet="Pedidos" />
             <End Role="Pagos" EntitySet="Pagos" />
           </AssociationSet>
+          <AssociationSet Name="fk_Pedidos_Usuarios" Association="Self.fk_Pedidos_Usuarios">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Pedidos" EntitySet="Pedidos" />
+          </AssociationSet>
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Pastelería_MiskilaModelStoreContainer" CdmEntityContainer="Pastelería_MiskilaEntities">
-          <EntitySetMapping Name="Administradores">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.Administradores">
-              <MappingFragment StoreEntitySet="Administradores">
-                <ScalarProperty Name="id_administrador" ColumnName="id_administrador" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="nombre_usuario" ColumnName="nombre_usuario" />
-                <ScalarProperty Name="contrasena_hash" ColumnName="contrasena_hash" />
-                <ScalarProperty Name="rol" ColumnName="rol" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Clientes">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.Clientes">
-              <MappingFragment StoreEntitySet="Clientes">
-                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
-                <ScalarProperty Name="nombre" ColumnName="nombre" />
-                <ScalarProperty Name="celular" ColumnName="celular" />
-                <ScalarProperty Name="contrasena_hash" ColumnName="contrasena_hash" />
-                <ScalarProperty Name="estado" ColumnName="estado" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
+        <EntityContainerMapping StorageEntityContainer="LabPastelería_MiskilaModelStoreContainer" CdmEntityContainer="LabPastelería_MiskilaEntities">
           <EntitySetMapping Name="DetallePedido">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.DetallePedido">
+            <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.DetallePedido">
               <MappingFragment StoreEntitySet="DetallePedido">
                 <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
                 <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
@@ -545,7 +502,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Entregas">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.Entregas">
+            <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.Entregas">
               <MappingFragment StoreEntitySet="Entregas">
                 <ScalarProperty Name="id_entrega" ColumnName="id_entrega" />
                 <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
@@ -558,7 +515,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Inventario">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.Inventario">
+            <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.Inventario">
               <MappingFragment StoreEntitySet="Inventario">
                 <ScalarProperty Name="id_producto" ColumnName="id_producto" />
                 <ScalarProperty Name="cantidad_disponible" ColumnName="cantidad_disponible" />
@@ -569,7 +526,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pagos">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.Pagos">
+            <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.Pagos">
               <MappingFragment StoreEntitySet="Pagos">
                 <ScalarProperty Name="id_pago" ColumnName="id_pago" />
                 <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
@@ -582,10 +539,10 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Pedidos">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.Pedidos">
+            <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.Pedidos">
               <MappingFragment StoreEntitySet="Pedidos">
                 <ScalarProperty Name="id_pedido" ColumnName="id_pedido" />
-                <ScalarProperty Name="id_cliente" ColumnName="id_cliente" />
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
                 <ScalarProperty Name="fecha_pedido" ColumnName="fecha_pedido" />
                 <ScalarProperty Name="fecha_entrega" ColumnName="fecha_entrega" />
                 <ScalarProperty Name="tipo_pedido" ColumnName="tipo_pedido" />
@@ -597,7 +554,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Personalizacion">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.Personalizacion">
+            <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.Personalizacion">
               <MappingFragment StoreEntitySet="Personalizacion">
                 <ScalarProperty Name="id_personalizacion" ColumnName="id_personalizacion" />
                 <ScalarProperty Name="id_detalle" ColumnName="id_detalle" />
@@ -611,7 +568,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Productos">
-            <EntityTypeMapping TypeName="Pastelería_MiskilaModel.Productos">
+            <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.Productos">
               <MappingFragment StoreEntitySet="Productos">
                 <ScalarProperty Name="id_producto" ColumnName="id_producto" />
                 <ScalarProperty Name="nombre" ColumnName="nombre" />
@@ -619,6 +576,19 @@
                 <ScalarProperty Name="precio" ColumnName="precio" />
                 <ScalarProperty Name="imagen" ColumnName="imagen" />
                 <ScalarProperty Name="disponible" ColumnName="disponible" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Usuarios">
+            <EntityTypeMapping TypeName="LabPastelería_MiskilaModel.Usuarios">
+              <MappingFragment StoreEntitySet="Usuarios">
+                <ScalarProperty Name="id_usuario" ColumnName="id_usuario" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="rol" ColumnName="rol" />
+                <ScalarProperty Name="contrasena_hash" ColumnName="contrasena_hash" />
                 <ScalarProperty Name="estado" ColumnName="estado" />
               </MappingFragment>
             </EntityTypeMapping>
