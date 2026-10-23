@@ -28,145 +28,140 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.txtTitulo = new System.Windows.Forms.Label();
-            this.BtnClientes = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.btnUsuarios = new System.Windows.Forms.Button();
+            this.btnProductos = new System.Windows.Forms.Button();
+            this.btnPedidos = new System.Windows.Forms.Button();
+            this.btnInventario = new System.Windows.Forms.Button();
+            this.btnPerfil = new System.Windows.Forms.Button();
+            this.contenedor = new System.Windows.Forms.GroupBox();
+            this.contenedor.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::CpPastelería_Miskila.Properties.Resources.ImageLogo;
-            this.pictureBox1.Location = new System.Drawing.Point(25, 45);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(220, 75);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // txtTitulo
             // 
+            this.txtTitulo.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtTitulo.AutoSize = true;
             this.txtTitulo.Font = new System.Drawing.Font("Montserrat", 39.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTitulo.ForeColor = System.Drawing.Color.Teal;
-            this.txtTitulo.Location = new System.Drawing.Point(513, 125);
+            this.txtTitulo.Location = new System.Drawing.Point(67, 33);
             this.txtTitulo.Name = "txtTitulo";
             this.txtTitulo.Size = new System.Drawing.Size(366, 83);
             this.txtTitulo.TabIndex = 1;
             this.txtTitulo.Text = "Administrar";
             this.txtTitulo.Click += new System.EventHandler(this.label1_Click);
             // 
-            // BtnClientes
+            // btnUsuarios
             // 
-            this.BtnClientes.BackColor = System.Drawing.Color.White;
-            this.BtnClientes.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnClientes.Location = new System.Drawing.Point(466, 241);
-            this.BtnClientes.Name = "BtnClientes";
-            this.BtnClientes.Size = new System.Drawing.Size(465, 44);
-            this.BtnClientes.TabIndex = 2;
-            this.BtnClientes.Text = "Clientes";
-            this.BtnClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnClientes.UseVisualStyleBackColor = false;
+            this.btnUsuarios.BackColor = System.Drawing.Color.White;
+            this.btnUsuarios.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUsuarios.Location = new System.Drawing.Point(24, 349);
+            this.btnUsuarios.Name = "btnUsuarios";
+            this.btnUsuarios.Size = new System.Drawing.Size(465, 44);
+            this.btnUsuarios.TabIndex = 2;
+            this.btnUsuarios.Text = "Usuarios";
+            this.btnUsuarios.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnUsuarios.UseVisualStyleBackColor = false;
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
             // 
-            // button1
+            // btnProductos
             // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(466, 304);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(465, 44);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Productos";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = false;
+            this.btnProductos.AccessibleRole = System.Windows.Forms.AccessibleRole.Cursor;
+            this.btnProductos.BackColor = System.Drawing.Color.White;
+            this.btnProductos.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnProductos.Location = new System.Drawing.Point(24, 157);
+            this.btnProductos.Name = "btnProductos";
+            this.btnProductos.Size = new System.Drawing.Size(465, 44);
+            this.btnProductos.TabIndex = 3;
+            this.btnProductos.Text = "Productos";
+            this.btnProductos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnProductos.UseVisualStyleBackColor = false;
+            this.btnProductos.Click += new System.EventHandler(this.btnProductos_Click);
             // 
-            // button2
+            // btnPedidos
             // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(466, 371);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(465, 44);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Pedidos";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.UseVisualStyleBackColor = false;
+            this.btnPedidos.BackColor = System.Drawing.Color.White;
+            this.btnPedidos.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPedidos.Location = new System.Drawing.Point(24, 224);
+            this.btnPedidos.Name = "btnPedidos";
+            this.btnPedidos.Size = new System.Drawing.Size(465, 44);
+            this.btnPedidos.TabIndex = 4;
+            this.btnPedidos.Text = "Pedidos";
+            this.btnPedidos.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnPedidos.UseVisualStyleBackColor = false;
+            this.btnPedidos.Click += new System.EventHandler(this.btnPedidos_Click);
             // 
-            // button3
+            // btnInventario
             // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(466, 434);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(465, 44);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Inventario";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.UseVisualStyleBackColor = false;
+            this.btnInventario.BackColor = System.Drawing.Color.White;
+            this.btnInventario.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInventario.Location = new System.Drawing.Point(24, 287);
+            this.btnInventario.Name = "btnInventario";
+            this.btnInventario.Size = new System.Drawing.Size(465, 44);
+            this.btnInventario.TabIndex = 5;
+            this.btnInventario.Text = "Inventario";
+            this.btnInventario.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnInventario.UseVisualStyleBackColor = false;
+            this.btnInventario.Click += new System.EventHandler(this.btnInventario_Click);
             // 
-            // button4
+            // btnPerfil
             // 
-            this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button4.Font = new System.Drawing.Font("Montserrat SemiBold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.Teal;
-            this.button4.Location = new System.Drawing.Point(1, 180);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(183, 52);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Perfil";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.UseVisualStyleBackColor = false;
+            this.btnPerfil.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.btnPerfil.Font = new System.Drawing.Font("Montserrat SemiBold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPerfil.ForeColor = System.Drawing.Color.Teal;
+            this.btnPerfil.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPerfil.Location = new System.Drawing.Point(849, 45);
+            this.btnPerfil.Name = "btnPerfil";
+            this.btnPerfil.Size = new System.Drawing.Size(182, 52);
+            this.btnPerfil.TabIndex = 6;
+            this.btnPerfil.Text = "Perfil";
+            this.btnPerfil.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPerfil.UseVisualStyleBackColor = false;
+            this.btnPerfil.Click += new System.EventHandler(this.button4_Click);
             // 
-            // button5
+            // contenedor
             // 
-            this.button5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button5.Font = new System.Drawing.Font("Montserrat SemiBold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.Teal;
-            this.button5.Location = new System.Drawing.Point(1, 241);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(183, 52);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Admin";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button5.UseVisualStyleBackColor = false;
+            this.contenedor.BackColor = System.Drawing.Color.Transparent;
+            this.contenedor.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.contenedor.Controls.Add(this.btnProductos);
+            this.contenedor.Controls.Add(this.txtTitulo);
+            this.contenedor.Controls.Add(this.btnInventario);
+            this.contenedor.Controls.Add(this.btnUsuarios);
+            this.contenedor.Controls.Add(this.btnPedidos);
+            this.contenedor.Location = new System.Drawing.Point(318, 184);
+            this.contenedor.Name = "contenedor";
+            this.contenedor.Size = new System.Drawing.Size(513, 425);
+            this.contenedor.TabIndex = 7;
+            this.contenedor.TabStop = false;
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1080, 687);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.BtnClientes);
-            this.Controls.Add(this.txtTitulo);
-            this.Controls.Add(this.pictureBox1);
+            this.BackColor = System.Drawing.Color.White;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.ClientSize = new System.Drawing.Size(1174, 710);
+            this.Controls.Add(this.contenedor);
+            this.Controls.Add(this.btnPerfil);
             this.Name = "FrmPrincipal";
             this.Text = "::: Miskila Principal :::";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.contenedor.ResumeLayout(false);
+            this.contenedor.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label txtTitulo;
-        private System.Windows.Forms.Button BtnClientes;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnUsuarios;
+        private System.Windows.Forms.Button btnProductos;
+        private System.Windows.Forms.Button btnPedidos;
+        private System.Windows.Forms.Button btnInventario;
+        private System.Windows.Forms.Button btnPerfil;
+        private System.Windows.Forms.GroupBox contenedor;
     }
 }

@@ -7,11 +7,11 @@ using CadPastelería_Miskila;
 
 namespace ClnPastelería_Miskila
 {
-    internal class PedidosCln
+    public class PedidosCln
     {
         public static int crearPedido(Pedidos pedido)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var existe = context.Pedidos.Where(p => p.id_pedido == pedido.id_pedido).FirstOrDefault();
                 if (existe != null)
@@ -25,7 +25,7 @@ namespace ClnPastelería_Miskila
         }
         public static int actualizarPedido(Pedidos pedido)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var existe = context.Pedidos.Where(p => p.id_pedido == pedido.id_pedido).FirstOrDefault();
                 if (existe == null)
@@ -34,7 +34,7 @@ namespace ClnPastelería_Miskila
                 }
                 existe.fecha_pedido = pedido.fecha_pedido;
                 existe.fecha_entrega = pedido.fecha_entrega;
-                existe.id_cliente = pedido.id_cliente;
+                existe.id_usuario = pedido.id_usuario;
                 existe.total = pedido.total;
                 existe.tipo_pedido = pedido.tipo_pedido;
                 existe.estado = pedido.estado;
@@ -44,7 +44,7 @@ namespace ClnPastelería_Miskila
         }
         public static int eliminarPedido(int id_pedido)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var existe = context.Pedidos.Find(id_pedido);
                 if (existe == null)
@@ -57,7 +57,7 @@ namespace ClnPastelería_Miskila
         }
         public static Pedidos obtenerPedido(int id_pedido)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var pedido = context.Pedidos.Find(id_pedido);
                 if (pedido == null)
@@ -69,10 +69,19 @@ namespace ClnPastelería_Miskila
         }
         public static List<Pedidos> obtenerPedidos()
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
-                return context.Pedidos.Where(p => p.estado == (short)Estado.Pendiente).OrderBy(p => p.id_pedido).ToList();
+                string estadoPendiente = Estado.Activo.ToString();
+                return context.Pedidos.Where(p => p.estado == estadoPendiente).OrderBy(p => p.id_pedido).ToList();
             }
+        }
+        public static List<Pedidos> listar(string parametro)
+        {
+            var context = new LabPastelería_MiskilaEntities();
+            return context.Pedidos
+                          .Include("Usuarios")
+                          .Where(p => p.estado != "-1" && (string.IsNullOrEmpty(parametro) || p.Usuarios.nombre.Contains(parametro)))
+                          .ToList();
         }
     }
 }

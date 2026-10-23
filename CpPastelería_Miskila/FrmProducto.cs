@@ -189,5 +189,15 @@ namespace CpPastelería_Miskila
                 }
             }
         }
+
+        private void gbxBusqueda_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblTitulo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

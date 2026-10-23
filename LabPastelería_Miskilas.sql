@@ -68,7 +68,7 @@ CREATE TABLE Pedidos (
     fecha_entrega DATETIME NULL,
     tipo_pedido VARCHAR(50) NOT NULL, -- En línea / Presencial
     total DECIMAL(18,2) NOT NULL,
-    estado VARCHAR(50) NOT NULL,
+    estado SMALLINT NOT NULL,
     observaciones VARCHAR(MAX),
     CONSTRAINT fk_Pedidos_Usuarios FOREIGN KEY (id_usuario) REFERENCES Usuarios(id_usuario) ON DELETE SET NULL
 );
@@ -161,7 +161,7 @@ GO
 -- 4. Pedidos
 INSERT INTO Pedidos (id_usuario, fecha_pedido, fecha_entrega, tipo_pedido, total, estado, observaciones) 
 VALUES 
-(1, GETDATE(), DATEADD(day, 1, GETDATE()), 'En línea', 90.00, 'Pendiente', 'Entregar por la tarde por favor'),
+(1, GETDATE(), DATEADD(day, 1, GETDATE()), 'En línea', 90.00, 1, 'Entregar por la tarde por favor'),
 (2, GETDATE(), NULL, 'Presencial', 35.00, 'Completado', 'Ninguna');
 GO
 

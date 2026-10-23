@@ -11,7 +11,7 @@ namespace ClnPastelería_Miskila
     {
         public static int crearDetallePedido(DetallePedido detallePedido)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var existe = context.DetallePedido.Where(d => d.id_detalle == detallePedido.id_detalle).FirstOrDefault();
                 if (existe != null)
@@ -25,7 +25,7 @@ namespace ClnPastelería_Miskila
         }
         public static int actualizarDetallePedido(DetallePedido detallePedido)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var existe = context.DetallePedido.Where(d => d.id_detalle == detallePedido.id_detalle).FirstOrDefault();
                 if (existe == null)
@@ -42,7 +42,7 @@ namespace ClnPastelería_Miskila
         }
         public static int eliminarDetallePedido(int id_detalle)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var existe = context.DetallePedido.Find(id_detalle);
                 if (existe == null)
@@ -55,7 +55,7 @@ namespace ClnPastelería_Miskila
         }
         public static DetallePedido obtenerDetallePedido(int id_detalle)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var detallePedido = context.DetallePedido.Find(id_detalle);
                 if (detallePedido == null)
@@ -67,7 +67,7 @@ namespace ClnPastelería_Miskila
         }
         public static List<DetallePedido> obtenerDetallesPedidoPorIdPedido(int id_pedido)
         {
-            using (var context = new Pastelería_MiskilaEntities())
+            using (var context = new LabPastelería_MiskilaEntities())
             {
                 var detallesPedido = context.DetallePedido.Where(d => d.id_pedido == id_pedido).ToList();
                 if (detallesPedido == null || detallesPedido.Count == 0)
