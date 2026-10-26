@@ -28,130 +28,188 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmPrincipal));
+            this.c1Ribbon1 = new C1.Win.Ribbon.C1Ribbon();
+            this.ribbonApplicationMenu1 = new C1.Win.Ribbon.RibbonApplicationMenu();
+            this.ribbonBottomToolBar1 = new C1.Win.Ribbon.RibbonBottomToolBar();
+            this.ribbonConfigToolBar1 = new C1.Win.Ribbon.RibbonConfigToolBar();
+            this.ribbonQat1 = new C1.Win.Ribbon.RibbonQat();
+            this.ribbonTab1 = new C1.Win.Ribbon.RibbonTab();
+            this.ribbonGroup1 = new C1.Win.Ribbon.RibbonGroup();
+            this.btnProducto = new C1.Win.Ribbon.RibbonButton();
+            this.btnUsuarios = new C1.Win.Ribbon.RibbonButton();
+            this.ribbonTab2 = new C1.Win.Ribbon.RibbonTab();
+            this.ribbonGroup2 = new C1.Win.Ribbon.RibbonGroup();
+            this.btnNuevaVenta = new C1.Win.Ribbon.RibbonButton();
+            this.btnHistorial = new C1.Win.Ribbon.RibbonButton();
+            this.btnPagos = new C1.Win.Ribbon.RibbonButton();
+            this.ribbonTab4 = new C1.Win.Ribbon.RibbonTab();
+            this.ribbonGroup4 = new C1.Win.Ribbon.RibbonGroup();
+            this.btnPerfil = new C1.Win.Ribbon.RibbonButton();
+            this.btnCerrar = new C1.Win.Ribbon.RibbonButton();
+            this.ribbonTopToolBar1 = new C1.Win.Ribbon.RibbonTopToolBar();
+            this.c1MultiDocument1 = new C1.C1Preview.C1MultiDocument();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.txtTitulo = new System.Windows.Forms.Label();
-            this.BtnClientes = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.c1Ribbon1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
+            // c1Ribbon1
+            // 
+            this.c1Ribbon1.ApplicationMenuHolder = this.ribbonApplicationMenu1;
+            this.c1Ribbon1.AutoSizeElement = C1.Framework.AutoSizeElement.Width;
+            this.c1Ribbon1.BottomToolBarHolder = this.ribbonBottomToolBar1;
+            this.c1Ribbon1.ConfigToolBarHolder = this.ribbonConfigToolBar1;
+            this.c1Ribbon1.Location = new System.Drawing.Point(0, 0);
+            this.c1Ribbon1.Name = "c1Ribbon1";
+            this.c1Ribbon1.QatHolder = this.ribbonQat1;
+            this.c1Ribbon1.Size = new System.Drawing.Size(1100, 161);
+            this.c1Ribbon1.Tabs.Add(this.ribbonTab1);
+            this.c1Ribbon1.Tabs.Add(this.ribbonTab2);
+            this.c1Ribbon1.Tabs.Add(this.ribbonTab4);
+            this.c1Ribbon1.TopToolBarHolder = this.ribbonTopToolBar1;
+            // 
+            // ribbonApplicationMenu1
+            // 
+            this.ribbonApplicationMenu1.Name = "ribbonApplicationMenu1";
+            // 
+            // ribbonBottomToolBar1
+            // 
+            this.ribbonBottomToolBar1.Name = "ribbonBottomToolBar1";
+            // 
+            // ribbonConfigToolBar1
+            // 
+            this.ribbonConfigToolBar1.Name = "ribbonConfigToolBar1";
+            // 
+            // ribbonQat1
+            // 
+            this.ribbonQat1.Name = "ribbonQat1";
+            // 
+            // ribbonTab1
+            // 
+            this.ribbonTab1.Groups.Add(this.ribbonGroup1);
+            this.ribbonTab1.Name = "ribbonTab1";
+            this.ribbonTab1.Text = "Administración";
+            // 
+            // ribbonGroup1
+            // 
+            this.ribbonGroup1.Items.Add(this.btnProducto);
+            this.ribbonGroup1.Items.Add(this.btnUsuarios);
+            this.ribbonGroup1.Name = "ribbonGroup1";
+            this.ribbonGroup1.Text = "Gestión";
+            // 
+            // btnProducto
+            // 
+            this.btnProducto.IconSet.Add(new C1.Framework.C1BitmapIcon(null, new System.Drawing.Size(32, 32), System.Drawing.Color.Transparent, ((System.Drawing.Image)(resources.GetObject("btnProducto.IconSet")))));
+            this.btnProducto.Name = "btnProducto";
+            this.btnProducto.Text = "Productos";
+            this.btnProducto.Click += new System.EventHandler(this.btnProducto_Click);
+            // 
+            // btnUsuarios
+            // 
+            this.btnUsuarios.IconSet.Add(new C1.Framework.C1BitmapIcon(null, new System.Drawing.Size(32, 32), System.Drawing.Color.Transparent, ((System.Drawing.Image)(resources.GetObject("btnUsuarios.IconSet")))));
+            this.btnUsuarios.Name = "btnUsuarios";
+            this.btnUsuarios.Text = "Usuarios";
+            this.btnUsuarios.Click += new System.EventHandler(this.btnUsuarios_Click);
+            // 
+            // ribbonTab2
+            // 
+            this.ribbonTab2.Groups.Add(this.ribbonGroup2);
+            this.ribbonTab2.Name = "ribbonTab2";
+            this.ribbonTab2.Text = "Ventas";
+            // 
+            // ribbonGroup2
+            // 
+            this.ribbonGroup2.Items.Add(this.btnNuevaVenta);
+            this.ribbonGroup2.Items.Add(this.btnHistorial);
+            this.ribbonGroup2.Items.Add(this.btnPagos);
+            this.ribbonGroup2.Name = "ribbonGroup2";
+            this.ribbonGroup2.Text = "Pedidos";
+            // 
+            // btnNuevaVenta
+            // 
+            this.btnNuevaVenta.IconSet.Add(new C1.Framework.C1BitmapIcon(null, new System.Drawing.Size(32, 32), System.Drawing.Color.Transparent, ((System.Drawing.Image)(resources.GetObject("btnNuevaVenta.IconSet")))));
+            this.btnNuevaVenta.Name = "btnNuevaVenta";
+            this.btnNuevaVenta.Text = "Nueva venta";
+            this.btnNuevaVenta.Click += new System.EventHandler(this.btnNuevaVenta_Click);
+            // 
+            // btnHistorial
+            // 
+            this.btnHistorial.IconSet.Add(new C1.Framework.C1BitmapIcon(null, new System.Drawing.Size(31, 31), System.Drawing.Color.Transparent, ((System.Drawing.Image)(resources.GetObject("btnHistorial.IconSet")))));
+            this.btnHistorial.Name = "btnHistorial";
+            this.btnHistorial.Text = "Historial de pedidos";
+            this.btnHistorial.Click += new System.EventHandler(this.btnHistorial_Click);
+            // 
+            // btnPagos
+            // 
+            this.btnPagos.IconSet.Add(new C1.Framework.C1BitmapIcon(null, new System.Drawing.Size(31, 25), System.Drawing.Color.Transparent, ((System.Drawing.Image)(resources.GetObject("btnPagos.IconSet")))));
+            this.btnPagos.Name = "btnPagos";
+            this.btnPagos.Text = "Pagos";
+            this.btnPagos.Click += new System.EventHandler(this.btnPagos_Click);
+            // 
+            // ribbonTab4
+            // 
+            this.ribbonTab4.Groups.Add(this.ribbonGroup4);
+            this.ribbonTab4.Name = "ribbonTab4";
+            this.ribbonTab4.Text = "Sistema";
+            // 
+            // ribbonGroup4
+            // 
+            this.ribbonGroup4.Items.Add(this.btnPerfil);
+            this.ribbonGroup4.Items.Add(this.btnCerrar);
+            this.ribbonGroup4.Name = "ribbonGroup4";
+            this.ribbonGroup4.Text = "Sesión";
+            // 
+            // btnPerfil
+            // 
+            this.btnPerfil.IconSet.Add(new C1.Framework.C1BitmapIcon(null, new System.Drawing.Size(32, 32), System.Drawing.Color.Transparent, ((System.Drawing.Image)(resources.GetObject("btnPerfil.IconSet")))));
+            this.btnPerfil.Name = "btnPerfil";
+            this.btnPerfil.Text = "Mi perfil";
+            this.btnPerfil.Click += new System.EventHandler(this.btnPerfil_Click);
+            // 
+            // btnCerrar
+            // 
+            this.btnCerrar.IconSet.Add(new C1.Framework.C1BitmapIcon("Cancel1", new System.Drawing.Size(32, 32), System.Drawing.Color.Transparent, "Preset_LargeImages", 24));
+            this.btnCerrar.Name = "btnCerrar";
+            this.btnCerrar.Text = "Cerrar sesión";
+            this.btnCerrar.Click += new System.EventHandler(this.btnCerrar_Click);
+            // 
+            // ribbonTopToolBar1
+            // 
+            this.ribbonTopToolBar1.Name = "ribbonTopToolBar1";
+            // 
+            // c1MultiDocument1
+            // 
+            this.c1MultiDocument1.DocumentName = null;
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::CpPastelería_Miskila.Properties.Resources.ImageLogo;
-            this.pictureBox1.Location = new System.Drawing.Point(25, 45);
+            this.pictureBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(0, 0);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(220, 75);
-            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.Size = new System.Drawing.Size(1100, 680);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
-            // 
-            // txtTitulo
-            // 
-            this.txtTitulo.AutoSize = true;
-            this.txtTitulo.Font = new System.Drawing.Font("Montserrat", 39.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTitulo.ForeColor = System.Drawing.Color.Teal;
-            this.txtTitulo.Location = new System.Drawing.Point(513, 125);
-            this.txtTitulo.Name = "txtTitulo";
-            this.txtTitulo.Size = new System.Drawing.Size(366, 83);
-            this.txtTitulo.TabIndex = 1;
-            this.txtTitulo.Text = "Administrar";
-            this.txtTitulo.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // BtnClientes
-            // 
-            this.BtnClientes.BackColor = System.Drawing.Color.White;
-            this.BtnClientes.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.BtnClientes.Location = new System.Drawing.Point(466, 241);
-            this.BtnClientes.Name = "BtnClientes";
-            this.BtnClientes.Size = new System.Drawing.Size(465, 44);
-            this.BtnClientes.TabIndex = 2;
-            this.BtnClientes.Text = "Clientes";
-            this.BtnClientes.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.BtnClientes.UseVisualStyleBackColor = false;
-            // 
-            // button1
-            // 
-            this.button1.BackColor = System.Drawing.Color.White;
-            this.button1.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(466, 304);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(465, 44);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "Productos";
-            this.button1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button1.UseVisualStyleBackColor = false;
-            // 
-            // button2
-            // 
-            this.button2.BackColor = System.Drawing.Color.White;
-            this.button2.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(466, 371);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(465, 44);
-            this.button2.TabIndex = 4;
-            this.button2.Text = "Pedidos";
-            this.button2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button2.UseVisualStyleBackColor = false;
-            // 
-            // button3
-            // 
-            this.button3.BackColor = System.Drawing.Color.White;
-            this.button3.Font = new System.Drawing.Font("Montserrat", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(466, 434);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(465, 44);
-            this.button3.TabIndex = 5;
-            this.button3.Text = "Inventario";
-            this.button3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.button3.UseVisualStyleBackColor = false;
-            // 
-            // button4
-            // 
-            this.button4.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button4.Font = new System.Drawing.Font("Montserrat SemiBold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.ForeColor = System.Drawing.Color.Teal;
-            this.button4.Location = new System.Drawing.Point(1, 180);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(183, 52);
-            this.button4.TabIndex = 6;
-            this.button4.Text = "Perfil";
-            this.button4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button4.UseVisualStyleBackColor = false;
-            // 
-            // button5
-            // 
-            this.button5.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.button5.Font = new System.Drawing.Font("Montserrat SemiBold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.ForeColor = System.Drawing.Color.Teal;
-            this.button5.Location = new System.Drawing.Point(1, 241);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(183, 52);
-            this.button5.TabIndex = 7;
-            this.button5.Text = "Admin";
-            this.button5.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.button5.UseVisualStyleBackColor = false;
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(1080, 687);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.BtnClientes);
-            this.Controls.Add(this.txtTitulo);
+            this.BackColor = System.Drawing.Color.White;
+            this.ClientSize = new System.Drawing.Size(1100, 680);
+            this.Controls.Add(this.c1Ribbon1);
             this.Controls.Add(this.pictureBox1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MinimumSize = new System.Drawing.Size(900, 560);
             this.Name = "FrmPrincipal";
-            this.Text = "::: Miskila Principal :::";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Menú Principal";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FrmPrincipal_FormClosing);
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.c1Ribbon1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -160,13 +218,26 @@
 
         #endregion
 
+        private C1.Win.Ribbon.C1Ribbon c1Ribbon1;
+        private C1.Win.Ribbon.RibbonBottomToolBar ribbonBottomToolBar1;
+        private C1.Win.Ribbon.RibbonConfigToolBar ribbonConfigToolBar1;
+        private C1.Win.Ribbon.RibbonQat ribbonQat1;
+        private C1.Win.Ribbon.RibbonTopToolBar ribbonTopToolBar1;
+        private C1.Win.Ribbon.RibbonTab ribbonTab1;
+        private C1.Win.Ribbon.RibbonGroup ribbonGroup1;
+        private C1.Win.Ribbon.RibbonButton btnProducto;
+        private C1.Win.Ribbon.RibbonButton btnUsuarios;
+        private C1.Win.Ribbon.RibbonTab ribbonTab2;
+        private C1.Win.Ribbon.RibbonGroup ribbonGroup2;
+        private C1.Win.Ribbon.RibbonButton btnNuevaVenta;
+        private C1.Win.Ribbon.RibbonButton btnHistorial;
+        private C1.Win.Ribbon.RibbonButton btnPagos;
+        private C1.Win.Ribbon.RibbonTab ribbonTab4;
+        private C1.Win.Ribbon.RibbonGroup ribbonGroup4;
+        private C1.Win.Ribbon.RibbonButton btnPerfil;
+        private C1.Win.Ribbon.RibbonButton btnCerrar;
+        private C1.Win.Ribbon.RibbonApplicationMenu ribbonApplicationMenu1;
+        private C1.C1Preview.C1MultiDocument c1MultiDocument1;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.Label txtTitulo;
-        private System.Windows.Forms.Button BtnClientes;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
     }
 }

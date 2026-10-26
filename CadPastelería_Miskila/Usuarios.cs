@@ -14,7 +14,6 @@ namespace CadPastelería_Miskila
     
     public partial class Usuarios
     {
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Usuarios()
         {

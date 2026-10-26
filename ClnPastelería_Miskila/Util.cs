@@ -6,13 +6,7 @@ using System.Threading.Tasks;
 
 namespace ClnPastelería_Miskila
 {
-   public enum Estado
-    {
-        Pendiente = 1,
-        EnProceso = 2,
-        Completado = 3,
-        Cancelado = 4
-    }
+    public enum Estado { Activo = 1, Inactivo = 0, Eliminado = -1 };
     public enum Disponible
     {
         Disponible = 1,

@@ -7,7 +7,7 @@ using CadPastelería_Miskila;
 
 namespace ClnPastelería_Miskila
 {
-    internal class UsuarioCln
+    public class UsuarioCln
     {
         public static int crearUsuario(Usuarios usuario)
         {
@@ -73,6 +73,18 @@ namespace ClnPastelería_Miskila
             using (var context = new LabPastelería_MiskilaEntities())
             {
                 return context.Usuarios.ToList();
+            }
+        }
+        public static List<Usuarios> listar(string parametro)
+        {
+            using (var context = new LabPastelería_MiskilaEntities())
+            {
+
+                context.Configuration.LazyLoadingEnabled = false;
+                context.Configuration.ProxyCreationEnabled = false;
+
+                return context.Usuarios
+                    .Where(x => x.estado != -1 && (string.IsNullOrEmpty(parametro) || x.nombre.Contains(parametro) || x.email.Contains(parametro))).OrderBy(x => x.nombre).ToList();
             }
         }
         public static Usuarios autenticar(string emailOCelular, string contrasena)

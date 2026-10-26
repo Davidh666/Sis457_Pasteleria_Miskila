@@ -62,7 +62,8 @@
     <Compile Include="PersonalizacionCln.cs" />
     <Compile Include="ProductosCln.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UsuarioCln.cs" />
+    <Compile Include="UsuariosCln.cs" />
+    <Compile Include="Util.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
