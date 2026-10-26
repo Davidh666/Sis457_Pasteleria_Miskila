@@ -1,13 +1,7 @@
 ﻿using CadPastelería_Miskila;
 using ClnPastelería_Miskila;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Net.Mail;
 using System.Windows.Forms;
 
 namespace CpPastelería_Miskila
@@ -15,84 +9,54 @@ namespace CpPastelería_Miskila
     public partial class FrmUsuarios : Form
     {
         private bool esNuevo;
+        private int idUsuarioSeleccionado = 0;
 
         public FrmUsuarios()
         {
             InitializeComponent();
         }
 
+        private void FrmUsuarios_Load(object sender, EventArgs e)
+        {
+            modoEdicion(false);
+            listar();
+        }
+
+        // ---------- Utilidades ----------
+
+        // true = capturando datos (nuevo / editar), false = solo consulta
+        private void modoEdicion(bool editando)
+        {
+            gbxDatos.Enabled = editando;
+            pnlAcciones.Enabled = !editando;
+        }
+
+        // Id del usuario seleccionado en la grilla (null si no hay selección).
+        // Se lee por la columna del diseñador, no por un nombre de texto.
+        private int? idUsuarioActual()
+        {
+            if (dtgLista.CurrentRow == null) return null;
+            object valor = dtgLista.CurrentRow.Cells[colId.Index].Value;
+            return valor == null ? (int?)null : Convert.ToInt32(valor);
+        }
+
         private void listar()
         {
             try
             {
-                string parametro = (txtParametro != null) ? txtParametro.Text.Trim() : string.Empty;
+                string parametro = txtParametro.Text.Trim();
                 var usuarios = UsuarioCln.listar(parametro);
+                dtgLista.DataSource = usuarios;
 
-                dataGridView1.DataSource = usuarios;
-
-                if (dataGridView1.Columns["id_usuario"] != null) dataGridView1.Columns["id_usuario"].Visible = false;
-                if (dataGridView1.Columns["Id_Usuario"] != null) dataGridView1.Columns["Id_Usuario"].Visible = false;
-
-                if (dataGridView1.Columns["contrasena_hash"] != null) dataGridView1.Columns["contrasena_hash"].Visible = false;
-                if (dataGridView1.Columns["Contrasena_Hash"] != null) dataGridView1.Columns["Contrasena_Hash"].Visible = false;
-
-                if (dataGridView1.Columns["estado"] != null) dataGridView1.Columns["estado"].Visible = false;
-                if (dataGridView1.Columns["Estado"] != null) dataGridView1.Columns["Estado"].Visible = false;
-
-                if (dataGridView1.Columns["nombre"] != null) dataGridView1.Columns["nombre"].HeaderText = "Nombre";
-                if (dataGridView1.Columns["Nombre"] != null) dataGridView1.Columns["Nombre"].HeaderText = "Nombre";
-
-                if (dataGridView1.Columns["celular"] != null) dataGridView1.Columns["celular"].HeaderText = "Celular";
-                if (dataGridView1.Columns["Celular"] != null) dataGridView1.Columns["Celular"].HeaderText = "Celular";
-
-                if (dataGridView1.Columns["email"] != null) dataGridView1.Columns["email"].HeaderText = "Email";
-                if (dataGridView1.Columns["Email"] != null) dataGridView1.Columns["Email"].HeaderText = "Email";
-
-                if (dataGridView1.Columns["rol"] != null) dataGridView1.Columns["rol"].HeaderText = "Rol";
-                if (dataGridView1.Columns["Rol"] != null) dataGridView1.Columns["Rol"].HeaderText = "Rol";
-
-                
-                dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-                if (usuarios != null && usuarios.Count > 0)
-                {
-                    if (dataGridView1.Columns["nombre"] != null)
-                        dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["nombre"];
-                    else if (dataGridView1.Columns["Nombre"] != null)
-                        dataGridView1.CurrentCell = dataGridView1.Rows[0].Cells["Nombre"];
-
-                    btnEditar.Enabled = true;
-                    btnEliminar.Enabled = true;
-                }
-                else
-                {
-                    btnEditar.Enabled = false;
-                    btnEliminar.Enabled = false;
-                }
+                bool hayDatos = usuarios != null && usuarios.Count > 0;
+                btnEditar.Enabled = hayDatos;
+                btnEliminar.Enabled = hayDatos;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error al listar: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error al listar: " + ex.Message, "::: Error - Miskila :::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void FrmUsuarios_Load(object sender, EventArgs e)
-        {
-            // TODO: esta línea de código carga datos en la tabla 'labPastelería_MiskilaDataSet.Pedidos' Puede moverla o quitarla según sea necesario.
-            this.pedidosTableAdapter.Fill(this.labPastelería_MiskilaDataSet.Pedidos);
-            pnlAcciones.Enabled = true;
-            gbxDatos.Enabled = false;
-            listar();
-        }
-
-        private void btnBuscar_Click(object sender, EventArgs e)
-        {
-            listar();
-        }
-
-        private void txtParametro_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (e.KeyChar == (char)Keys.Enter) listar();
         }
 
         private void resetearCampos()
@@ -101,7 +65,8 @@ namespace CpPastelería_Miskila
             txtEmail.Clear();
             txtCelular.Clear();
             txtContrasena.Clear();
-            if (cbxRol.Items.Count > 0) cbxRol.SelectedIndex = -1;
+            cbxRol.SelectedIndex = -1;
+            idUsuarioSeleccionado = 0;
             resetearErrores();
         }
 
@@ -111,51 +76,20 @@ namespace CpPastelería_Miskila
             erpEmail.Clear();
             erpCelular.Clear();
             erpRol.Clear();
+            erpContrasena.Clear();
         }
 
-        private void btnNuevo_Click(object sender, EventArgs e)
+        private static bool emailValido(string email)
         {
-            esNuevo = true;
-            
-            pnlAcciones.Enabled = false;
-            gbxDatos.Enabled = true;
-            resetearCampos();
-            txtNombre.Focus();
-            if (cbxRol.Items.Count > 0) cbxRol.SelectedIndex = -1;
-        }
-
-        private void btnEditar_Click(object sender, EventArgs e)
-        {
-            if (dataGridView1.CurrentRow != null)
+            try
             {
-                esNuevo = false;
-               
-                pnlAcciones.Enabled = false;
-                gbxDatos.Enabled = true;
-
-                int id = (int)dataGridView1.CurrentRow.Cells["id_usuario"].Value;
-                var usuario = UsuarioCln.obtenerUsuario(id);
-                if (usuario != null)
-                {
-                    txtNombre.Text = usuario.nombre;
-                    txtEmail.Text = usuario.email;
-                    txtCelular.Text = usuario.celular;
-                    cbxRol.Text = usuario.rol;
-                    txtContrasena.Clear();
-                }
+                var direccion = new MailAddress(email);
+                return direccion.Address == email;
             }
-            else
+            catch (FormatException)
             {
-                MessageBox.Show("Seleccione un registro para editar.", "Advertencia", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
-        }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-             
-            pnlAcciones.Enabled = true;
-            gbxDatos.Enabled = false;
-            resetearCampos();
         }
 
         private bool validarCampos()
@@ -168,72 +102,177 @@ namespace CpPastelería_Miskila
                 erpNombre.SetError(txtNombre, "El nombre es obligatorio");
                 esValido = false;
             }
-            if (string.IsNullOrWhiteSpace(txtEmail.Text))
+
+            string email = txtEmail.Text.Trim();
+            if (string.IsNullOrWhiteSpace(email))
             {
                 erpEmail.SetError(txtEmail, "El email es obligatorio");
                 esValido = false;
             }
+            else if (!emailValido(email))
+            {
+                erpEmail.SetError(txtEmail, "Ingrese un email válido");
+                esValido = false;
+            }
+
             if (cbxRol.SelectedIndex == -1)
             {
                 erpRol.SetError(cbxRol, "Debe seleccionar un rol");
                 esValido = false;
             }
 
+            // Para un usuario nuevo la contraseña es obligatoria
+            if (esNuevo && string.IsNullOrWhiteSpace(txtContrasena.Text))
+            {
+                erpContrasena.SetError(txtContrasena, "La contraseña es obligatoria");
+                esValido = false;
+            }
+
             return esValido;
+        }
+
+        // ---------- Búsqueda ----------
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            listar();
+        }
+
+        private void txtParametro_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Enter)
+            {
+                e.Handled = true;
+                listar();
+            }
+        }
+
+        // ---------- Nuevo / Editar / Guardar / Cancelar ----------
+
+        private void btnNuevo_Click(object sender, EventArgs e)
+        {
+            esNuevo = true;
+            resetearCampos();
+            modoEdicion(true);
+            txtNombre.Focus();
+        }
+
+        private void btnEditar_Click(object sender, EventArgs e)
+        {
+            int? id = idUsuarioActual();
+            if (id == null)
+            {
+                MessageBox.Show("Seleccione un registro para editar.", "::: Advertencia - Miskila :::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                var usuario = UsuarioCln.obtenerUsuario(id.Value);
+                if (usuario == null)
+                {
+                    MessageBox.Show("No se encontró el usuario seleccionado.", "::: Advertencia - Miskila :::",
+                        MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                esNuevo = false;
+                resetearErrores();
+                idUsuarioSeleccionado = id.Value;
+
+                txtNombre.Text = usuario.nombre;
+                txtEmail.Text = usuario.email;
+                txtCelular.Text = usuario.celular;
+                cbxRol.SelectedIndex = cbxRol.FindStringExact(usuario.rol ?? string.Empty);
+                txtContrasena.Clear();
+
+                modoEdicion(true);
+                txtNombre.Focus();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar el usuario: " + ex.Message, "::: Error - Miskila :::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            if (validarCampos())
-            {
-                var usuario = new Usuarios
-                {
-                    nombre = txtNombre.Text.Trim(),
-                    email = txtEmail.Text.Trim(),
-                    celular = txtCelular.Text.Trim(),
-                    rol = cbxRol.Text,
-                    contrasena_hash = txtContrasena.Text.Trim()
-                };
+            if (!validarCampos()) return;
 
-                try
+            var usuario = new Usuarios
+            {
+                nombre = txtNombre.Text.Trim(),
+                email = txtEmail.Text.Trim(),
+                celular = txtCelular.Text.Trim(),
+                rol = cbxRol.Text,
+                contrasena_hash = txtContrasena.Text.Trim()
+            };
+
+            try
+            {
+                if (esNuevo)
                 {
-                    if (esNuevo)
-                    {
-                        UsuarioCln.crearUsuario(usuario);
-                    }
-                    else
-                    {
-                        usuario.id_usuario = (int)dataGridView1.CurrentRow.Cells["id_usuario"].Value;
-                        UsuarioCln.actualizarUsuario(usuario);
-                    }
-                    listar();
-                    btnCancelar.PerformClick();
-                    MessageBox.Show("Usuario guardado correctamente", "::: Mensaje - Miskila :::",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    UsuarioCln.crearUsuario(usuario);
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, "::: Error - Miskila :::",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    usuario.id_usuario = idUsuarioSeleccionado;
+                    UsuarioCln.actualizarUsuario(usuario);
                 }
+
+                listar();
+                cancelarEdicion();
+                MessageBox.Show("Usuario guardado correctamente.", "::: Mensaje - Miskila :::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "::: Error - Miskila :::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            cancelarEdicion();
+        }
+
+        private void cancelarEdicion()
+        {
+            resetearCampos();
+            modoEdicion(false);
+        }
+
+        // ---------- Eliminar / Cerrar ----------
+
         private void btnEliminar_Click(object sender, EventArgs e)
         {
-            if (dataGridView1.CurrentRow != null)
+            int? id = idUsuarioActual();
+            if (id == null)
             {
-                int id = (int)dataGridView1.CurrentRow.Cells["id_usuario"].Value;
-                string nombre = dataGridView1.CurrentRow.Cells["nombre"].Value.ToString();
-                DialogResult dialog = MessageBox.Show($"¿Está seguro que desea dar de baja al usuario {nombre}?",
-                    "::: Confirmación - Miskila :::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dialog == DialogResult.Yes)
-                {
-                    UsuarioCln.eliminarUsuario(id);
-                    listar();
-                    MessageBox.Show("Usuario dado de baja correctamente", "::: Mensaje - Miskila :::",
-                        MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
+                MessageBox.Show("Seleccione un registro para eliminar.", "::: Advertencia - Miskila :::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string nombre = Convert.ToString(dtgLista.CurrentRow.Cells[colNombre.Index].Value);
+            var dialogo = MessageBox.Show($"¿Está seguro que desea dar de baja al usuario {nombre}?",
+                "::: Confirmación - Miskila :::", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogo != DialogResult.Yes) return;
+
+            try
+            {
+                UsuarioCln.eliminarUsuario(id.Value);
+                listar();
+                MessageBox.Show("Usuario dado de baja correctamente.", "::: Mensaje - Miskila :::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al dar de baja: " + ex.Message, "::: Error - Miskila :::",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -242,17 +281,14 @@ namespace CpPastelería_Miskila
             Close();
         }
 
-        private void dataGridView_CellContentClick(object sender, DataGridViewCellEventArgs e) { }
-        private void label1_Click(object sender, EventArgs e) { }
-        private void cont1_Enter(object sender, EventArgs e) { }
+        // ---------- Celular: solo dígitos ----------
 
-        private void cont2_Enter(object sender, EventArgs e)
+        private void txtCelular_KeyPress(object sender, KeyPressEventArgs e)
         {
-
-        }
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            // Método requerido por el diseñador visual
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

@@ -199,5 +199,10 @@ namespace CpPastelería_Miskila
         {
 
         }
+
+        private void dgvLista_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

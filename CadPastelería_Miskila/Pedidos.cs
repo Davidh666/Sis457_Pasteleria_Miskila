@@ -39,5 +39,6 @@ namespace CadPastelería_Miskila
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pagos> Pagos { get; set; }
         public virtual Usuarios Usuarios { get; set; }
+    
     }
 }

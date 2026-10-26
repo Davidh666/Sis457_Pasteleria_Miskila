@@ -86,6 +86,7 @@
     <Compile Include="Pedidos.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
+    <Compile Include="PedidosExtension.cs" />
     <Compile Include="Personalizacion.cs">
       <DependentUpon>Modelo.tt</DependentUpon>
     </Compile>
